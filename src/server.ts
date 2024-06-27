@@ -22,17 +22,17 @@ connectDB();
 
 const server = express();
 
-const corsOptions: CorsOptions = {
-  origin: function (origin, callback) {
-    if (origin === process.env.FRONTEND_URL) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS Error"));
-    }
-  },
-};
+// const corsOptions: CorsOptions = {
+//   origin: function (origin, callback) {
+//     if (origin === process.env.FRONTEND_URL) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("CORS Error"));
+//     }
+//   },
+// };
 
-server.use(cors(corsOptions));
+server.use(cors());
 
 server.use(express.json());
 
