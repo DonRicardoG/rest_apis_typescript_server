@@ -22,12 +22,19 @@ connectDB();
 
 const server = express();
 
-const corsOptions: CorsOptions = {
-  origin: process.env.FRONTEND_URL,
-  optionsSuccessStatus: 200,
+const corsConfig: CorsOptions = {
+  origin: function (origin, callback) {
+    const whitelist = [process.env.FRONTEND_URL];
+
+    if (whitelist.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("CORS error"));
+    }
+  },
 };
 
-server.use(cors(corsOptions));
+server.use(cors(corsConfig));
 
 server.use(express.json());
 
